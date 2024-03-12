@@ -2419,7 +2419,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 2.485207, z: 1}
   m_Center: {x: 0, y: 1.2273612, z: 0}
@@ -2453,8 +2453,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
+  jumpForce: 10
+  gravityModifier: 1
   mouseSensitivity: 3
   theCamera: {fileID: 963194228}
+  groundCheckpoint: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!143 &1805878873
 CharacterController:
   m_ObjectHideFlags: 0
