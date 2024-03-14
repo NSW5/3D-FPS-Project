@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 10f;
     public float gravityModifier = 1f;
     public float mouseSensitivity = 1f;
+    public GameObject bullet;
     public Transform theCamera;
+    public Transform firePoint;
     public Transform groundCheckpoint;
     public LayerMask whatIsGround;
     private bool _canPlayerJump;
@@ -64,5 +66,26 @@ public class PlayerController : MonoBehaviour
 
         //Camera Rotation
         theCamera.rotation = Quaternion.Euler(theCamera.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+
+        //Handle Shooting
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+
+            if(Physics.Raycast(theCamera.position, theCamera.forward, out hit, 50f))
+            {
+                if(Vector3.Distance(theCamera.position, hit.point)> 2f)
+                {
+                    firePoint.LookAt(hit.point);
+                }
+                else
+                {
+                    firePoint.LookAt(theCamera.position + (theCamera.forward * 30f));
+
+                }
+
+                Instantiate(bullet, transform.position, transform.rotation);
+            }
+        }
     }
 }
