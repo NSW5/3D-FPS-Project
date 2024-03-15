@@ -81,7 +81,6 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     firePoint.LookAt(theCamera.position + (theCamera.forward * 30f));
-
                 }
 
                 Instantiate(bullet, firePoint.position, firePoint.rotation);
