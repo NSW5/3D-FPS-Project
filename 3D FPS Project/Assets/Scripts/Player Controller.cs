@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
                 }
 
-                Instantiate(bullet, transform.position, transform.rotation);
+                Instantiate(bullet, firePoint.position, firePoint.rotation);
             }
         }
     }
