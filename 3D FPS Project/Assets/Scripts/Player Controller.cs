@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool _canPlayerJump;
     private Vector3 _moveInput;
     private CharacterController _characterController;
+    private Ammo _ammo;
 
     // Start is called before the first frame update
     void Start()
