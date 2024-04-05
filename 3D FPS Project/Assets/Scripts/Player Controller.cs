@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 Instantiate(bullet, firePoint.position, firePoint.rotation);
+                _ammo.RemoveAmmo();
             }
         }
     }
