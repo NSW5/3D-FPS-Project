@@ -5,24 +5,24 @@ using UnityEngine;
 public class CrossFade : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
-    private float _fadeIn;
-    private float _fadeOut;
+    private bool _fadeIn;
+    private bool _fadeOut;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        FadeOut();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_fadeIn)
+        if (_fadeIn)
         {
-            if(canvasGroup.alpha < 1)
+            if (canvasGroup.alpha < 1)
             {
                 canvasGroup.alpha += Time.deltaTime;
-                if(canvasGroup.alpha >= 1)
+                if (canvasGroup.alpha >= 1)
                 {
                     _fadeIn = false;
                 }
@@ -31,16 +31,17 @@ public class CrossFade : MonoBehaviour
 
         if (_fadeOut)
         {
-            if(canvasGroup.alpha >= 0)
+            if (canvasGroup.alpha >= 0)
             {
                 canvasGroup.alpha -= Time.deltaTime;
-                if(canvasGroup.alpha == 0)
+                if (canvasGroup.alpha == 0)
                 {
                     _fadeOut = false;
+                    GameObject.Find("Game Manager").GetComponent<Timer>().StartGameTimer();
                 }
             }
         }
-    }
+    } // end Update
 
     public void FadeIn()
     {
