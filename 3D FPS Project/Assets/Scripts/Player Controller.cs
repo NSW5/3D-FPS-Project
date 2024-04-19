@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     public float gravityModifier = 1f;
     public float mouseSensitivity = 1f;
     public GameObject bullet;
-    public Transform theCamera;
     public Transform firePoint;
+    public Transform theCamera;
     public Transform groundCheckpoint;
     public LayerMask whatIsGround;
     private bool _canPlayerJump;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        _ammo = GetComponent<Ammo>();
     }
 
     // Update is called once per frame
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
         _canPlayerJump = Physics.OverlapSphere(groundCheckpoint.position, 0.50f, whatIsGround).Length > 0;
 
         //Apply a jump force to player
-        if(Input.GetKeyDown(KeyCode.Space) && _canPlayerJump)
+        if (Input.GetKeyDown(KeyCode.Space) && _canPlayerJump)
         {
             _moveInput.y = jumpForce;
         }
@@ -63,30 +64,30 @@ public class PlayerController : MonoBehaviour
         Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")) * mouseSensitivity;
 
         //Player Rotation
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation. eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
 
         //Camera Rotation
         theCamera.rotation = Quaternion.Euler(theCamera.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
 
         //Handle Shooting
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _ammo.GetAmmoAmount() > 0)
         {
             RaycastHit hit;
 
-            if(Physics.Raycast(theCamera.position, theCamera.forward, out hit, 50f))
+            if (Physics.Raycast(theCamera.position, theCamera.forward, out hit, 50f))
             {
-                if(Vector3.Distance(theCamera.position, hit.point)> 2f)
+                if (Vector3.Distance(theCamera.position, hit.point) > 2f)
                 {
                     firePoint.LookAt(hit.point);
                 }
-                else
-                {
-                    firePoint.LookAt(theCamera.position + (theCamera.forward * 30f));
-                }
-
-                Instantiate(bullet, firePoint.position, firePoint.rotation);
-                _ammo.RemoveAmmo();
             }
+            else
+            {
+                firePoint.LookAt(theCamera.position + (theCamera.forward * 30f));
+            }
+
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+           
         }
     }
 }

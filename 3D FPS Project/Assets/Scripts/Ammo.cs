@@ -6,8 +6,8 @@ using TMPro;
 public class Ammo : MonoBehaviour
 {
     public TextMeshProUGUI ammoText;
-    private int _ammoAmount = 10;
-    private int _ammoBoxAmount = 5;
+    private int _ammoAmount = 15;
+    private int _ammoBoxAmount = 10;
 
     // Start is called before the first frame update
     void Start()

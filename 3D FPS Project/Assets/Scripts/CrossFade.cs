@@ -37,7 +37,7 @@ public class CrossFade : MonoBehaviour
                 if (canvasGroup.alpha == 0)
                 {
                     _fadeOut = false;
-                    GameObject.Find("Game Manager").GetComponent<Timer>().StartGameTimer();
+                    GameObject.Find("GameManager").GetComponent<Timer>().StartGameTimer();
                 }
             }
         }
